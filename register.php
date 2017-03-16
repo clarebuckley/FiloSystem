@@ -5,11 +5,14 @@
     <title>FiLo System Register</title>
   </head>
   <body>
-    <h1>Welcome to the FiLo System</h1>
-    <p style="text-align: center;"><i>Report or find lost items</i><p>
-    </br>
+    <header id = "main-header">
+      <h1>Welcome to the FiLo System</h1>
+      <h4><i>Report or find lost items</i></h4>
+    </header>
+    <header id = "secondary-header">
+      <h2>Register a new account:</h2>
+    </header>
     <p><a href="index.php">Back</a></p>
-    <h2>Register a new account:</h2>
     <form>
       <p> Title:
       <select name="title">

@@ -2,15 +2,42 @@
   font-family: verdana;
 }
 
-h1 {
-    text-align: center;
+body{
+  width: 100%;
+	margin:0 auto;
+	display:flex;
+	flex-wrap:wrap;
+	box-sizing:border-box;
 }
 
-h2, p, form {
-   padding-left:50px;
+h2, form {
+  width: 100%;
+  padding-left:50px;
+}
+
+p{
+  padding-left:50px;
 }
 
 form{
     padding-right: 50px;
     padding-bottom: 50px;
+}
+
+#main-header {
+  width: 100%;
+	background-color:#264d73;
+	color:#FFFFFF;
+  text-align: center;
+}
+
+#secondary-header {
+  width: 100%;
+  background-color:#3973ac;
+  color:#FFFFFF;
+}
+
+#register {
+  width: 30%;
+  background-color:#d9e6f2;
 }
