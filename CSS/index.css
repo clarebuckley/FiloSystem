@@ -1,0 +1,16 @@
+*{
+  font-family: verdana;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2, p, form {
+   padding-left:50px;
+}
+
+form{
+    padding-right: 50px;
+    padding-bottom: 50px;
+}
