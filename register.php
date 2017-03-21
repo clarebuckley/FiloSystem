@@ -11,7 +11,7 @@ if(isset($_POST['username'])){
   $username = $_POST['username'];
 }
 if(!empty(trim($_POST['password']))){
-  $password = $_POST['password']; #needs to be hashed
+  $password = sha1($_POST['password']); 
 }
 if(isset($_POST['email'])){
   $email = $_POST['email'];
@@ -29,7 +29,7 @@ $insert=$db->prepare("INSERT INTO user (`Username`, `Password`, `Title`, `Forena
   $insert->bindParam(':psurname',$surname, PDO::PARAM_STR, 20);
   $insert->bindParam(':pemail',$email, PDO::PARAM_STR, 30);
   $insert->execute();
-  echo "Added record successfully";
+  echo "Added record successfully!";
 }
 catch(PDOException $exception) {
   //Catch exception
