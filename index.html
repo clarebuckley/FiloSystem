@@ -2,27 +2,38 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/index.css">
-    <title>FiLo System Login</title>
+    <title>FiLo System Homepage</title>
   </head>
   <body>
+
     <header id = "main-header">
-      <h1>Welcome to the FiLo System</h1>
+      <h1>FiLo System</h1>
       <h4><i>Report or find lost items</i></h4>
     </header>
     <header id = "secondary-header">
-      <h2>Login:</h2>
+      <h2>Home</h2>
     </header>
-    <form>
-      <p> Username: <input type="text" name="username" size="20" maxlength="20" required /></p>
-      <p> Password: <input type="password" name="password" size="20" maxlength="20" required /></p>
-      <p><input type="submit" name="submit" value="Submit" /></p>
+    <p><a href="login.php">Back</a></p>
+
+    <form action="home.php">
+    </br>
+      <input type="submit" value="Report a lost item" />
     </form>
+
+    <form action="home.php">
+      <input type="submit" value="Search for a lost item" />
+    </form>
+    </br></br>
+
     <section id = "register">
-      <p><i>Not registered?</i> <a href="register.html">Make an account</a></p>
       </br>
       <form action="home.php">
-        <input type="submit" value="Continue as guest" />
+        <input type="submit" value="Log out" />
+      </form>
+      <form action="register.php">
+        <input type="submit" value="Create an account" />
       </form>
     </section>
+
   </body>
 </html>

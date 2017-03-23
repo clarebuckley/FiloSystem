@@ -11,7 +11,7 @@ if(isset($_POST['username'])){
   $username = $_POST['username'];
 }
 if(!empty(trim($_POST['password']))){
-  $password = sha1($_POST['password']); 
+  $password = md5($_POST['password']);
 }
 if(isset($_POST['email'])){
   $email = $_POST['email'];
