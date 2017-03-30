@@ -13,6 +13,9 @@ if(isset($_POST['password'])){
 //Connect to database through PDO
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+//Sanitise inputs
+$safe_username = $db->quote($username);
 //Get user data
 $rows=$db->query("SELECT * FROM user");
 
@@ -20,8 +23,8 @@ $rows=$db->query("SELECT * FROM user");
 //Check if this username/password combination is in user table
 foreach($rows as $row){
   echo("Password: " .$password . "   DB:" . $row["Password"]);
-  if (($row["Password"] == $password) && (strcmp($row["Username"],$username) == 0)){
-    header( 'Location: index.html' );
+  if (($row["Password"] == $password) && (strcmp($row["Username"],$safe_username) == 0)){
+    header( 'Location: home.html' );
   }
   else {
     echo("rejected");

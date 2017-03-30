@@ -21,12 +21,13 @@ $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try{
-  //Insert record using form data
+  //Insert record using form data         # ********CHANGE USER TYPE
 $insert=$db->prepare("INSERT INTO user (`Username`, `Password`, `Title`, `Forename`, `Surname`, `Email`, `UserType`) VALUES(:pusername,
-  '".$password."','".$title."',:pforename,:pusername,:pemail,'Admin');" );
+  :ppassword,'".$title."',:pforename,:pusername,:pemail,'Admin');" );
   $insert->bindParam(':pusername',$username, PDO::PARAM_STR, 10);
+  $insert->bindParam(':ppassword',$password, PDO::PARAM_STR, 10);
   $insert->bindParam(':pforename',$forename, PDO::PARAM_STR, 20);
-  $insert->bindParam(':psurname',$surname, PDO::PARAM_STR, 20);
+  $insert->bindParam(':pusername',$surname, PDO::PARAM_STR, 20);
   $insert->bindParam(':pemail',$email, PDO::PARAM_STR, 30);
   $insert->execute();
   echo "Added record successfully!";
