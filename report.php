@@ -1,8 +1,10 @@
 <?php
 //Get form data, all are required in report.html
+echo "I work gud";
 $type = $_POST['type'];
 if(isset($_POST['date'])){
   $date = $_POST['date'];
+  echo $date;
 }
 if(isset($POST['addline1'])){
   $addline1 = $_POST['addline1'];
@@ -16,6 +18,7 @@ if(isset($_POST['postcode'])){
 if(isset($_POST['colour'])){
   $colour = $_POST['colour'];
   var_dump($_POST);
+  die();
 }
 if(($_FILES['photo']['size'] > 0) && ($_FILES['photo']['error'] == 0)) {
   $photo = explode('.', $_FILES['photo']['name']);
