@@ -1,58 +1,42 @@
-<?php
-//Get form data, all are required in report.html
-echo "I work gud";
-$type = $_POST['type'];
-if(isset($_POST['date'])){
-  $date = $_POST['date'];
-  echo $date;
-}
-if(isset($POST['addline1'])){
-  $addline1 = $_POST['addline1'];
-}
-if(isset($_POST['addline2'])){
-  $addline2 = $_POST['addline2'];
-}
-if(isset($_POST['postcode'])){
-  $postcode = $_POST['postcode'];
-}
-if(isset($_POST['colour'])){
-  $colour = $_POST['colour'];
-  var_dump($_POST);
-  die();
-}
-if(($_FILES['photo']['size'] > 0) && ($_FILES['photo']['error'] == 0)) {
-  $photo = explode('.', $_FILES['photo']['name']);
-  $extension = strtolower(end($photo));
-  if(($extension == "jpg") || ($extn == "jpeg") || ($extn == "gif")) {
-    $file = fopen($_FILES['photo']['tmp_name'], "rb");
-  }
-}
-if(isset($_POST['description'])){
-  $description = $_POST['description'];
-}
+<?php session_start();?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="report.js"></script>
+    <title>FiLo System Register</title>
+  </head>
+  <body>
+    <header id = "main-header">
+      <h1>FiLo System</h1>
+      <h4><i>Report or find lost items</i></h4>
+    </header>
+    <header id = "secondary-header">
+      <h2>Report a found item:</h2>
+    </header>
+    <p><a href="home.php">Back</a></p>
 
-//Connect to database through PDO
-$db = new PDO("mysql:dbname=coursework; host=localhost","root","");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    <form method="post" action="reportProcess.php"  enctype="multipart/form-data">
+      <p> Type of item:
+        <select name="type" onchange="changedType()" id="type">
+             <option value="Please select...">Please select...</option>
+			       <option value="Jewellery">  Jewellery </option>
+			       <option value="Electronics"> Electronics </option>
+			       <option value="Pet"> Pet </option>
+		    </select></p>
+      <p> Date found: <input type="date" name="date" size="10" maxlength="20" required /></p>
+      <p><i> Place found: </i></p>
+      <p> Address Line 1:<input type="text" name="addline1" size="30" maxlength="30" required /></p>
+      <p> Address Line 2:<input type="text" name="addline2" size="30" maxlength="30" required /></p>
+      <p> Post code:<input type="text" name="postcode" size="10" maxlength="10" required /></p>
+      <p> Colour: <input type="text" name="colour" size="20" maxlength="20" required /></p>
+      <p> Photo: <input type="file" name="photo" id="photo" size="20" maxlength="20" required /></p>
+      <p> Description: <input type="text" name="description" size="50" maxlength="50" required /></p>
 
-try{
-  //Insert record using form data     #*******CHANGE USER
-$insert=$db->prepare("INSERT INTO item (`FoundUser`, `Type`, `FoundDate`, `FoundAddLine1`, `FoundAddLine2`, `FoundPostCode`, `Colour`, `Photo`, `Description`)
-VALUES('1','".$type."',:pdate,:padd1,:padd2,:ppostcode,:pcolour,'".$photo."',:pdescription);" );
-  $insert->bindParam(':pdate',$date, PDO::PARAM_STR, 10);
-  $insert->bindParam(':padd1',$addline1, PDO::PARAM_STR, 20);
-  $insert->bindParam(':padd2',$addline2, PDO::PARAM_STR, 20);
-  $insert->bindParam(':ppostcode',$postcode, PDO::PARAM_STR, 20);
-  $insert->bindParam(':pcolour',$colour, PDO::PARAM_STR, 10);
-  $insert->bindParam(':pdescription',$description, PDO::PARAM_STR, 30);
-  $insert->execute();
-  echo "Added record successfully!";
-}
-catch(PDOException $exception) {
-  //Catch exception
-  ?>
-  <p>Sorry, an error has occured. Please try again, or contact IT services if problems persist.</p>
-  <p>Error details: <?= $exception->getMessage(); ?></p>
-  <?php
-}
- ?>
+      <!-- Input specific to each item -->
+      <div id="specific"></div>
+      <p><input type="submit" name="submit" id="submit" value="Submit" onclick="checkType()" /></p>
+    </form>
+
+  </body>
+</html>
