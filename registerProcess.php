@@ -1,5 +1,8 @@
 <?php
 session_start();
+if (! isset($_SESSION['name'])){
+  header("Location: index.php");
+}
 //Get form data, all are required in register.php
 $title = $_POST['title'];
 if(isset($_POST['forename'])){
@@ -22,11 +25,11 @@ $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try{
-  //Insert record using form data         # ********CHANGE USER TYPE
+  //Insert record using form data
   $insert=$db->prepare("INSERT INTO user (`Username`, `Password`, `Title`, `Forename`, `Surname`, `Email`, `UserType`) VALUES(?,
   ?,?,?,?,?,?)" );
-  $insert->execute(array($username, $password, $title, $forename, $surname, $email, 'Admin'));
-  echo "Added " . $title . " " . $forename . " " . $surname . " successfully!";
+  $insert->execute(array($username, $password, $title, $forename, $surname, $email, $_SESSION['userType']));
+  echo "Added " . $title . " " . $forename . " " . $surname . " successfully! <p><a href="home.php">Back</a></p>";
 }
 catch(PDOException $exception) {
   //Catch exception

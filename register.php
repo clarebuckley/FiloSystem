@@ -1,4 +1,5 @@
-<?php session_start();?>
+<?php session_start();
+//anyone can view this page?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -13,7 +14,7 @@
     <header id = "secondary-header">
       <h2>Register a new account:</h2>
     </header>
-    <p><a href="index.html">Back</a></p>
+    <p><a href="index.php">Back</a></p>
     <form method = "post" action = "registerProcess.php">
       <p> Title:
       <select name="title">

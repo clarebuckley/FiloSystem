@@ -22,6 +22,7 @@
       <p><i>Not registered?</i> <a href="register.php">Make an account</a></p>
       </br>
       <form action="home.php">
+        <?php $_SESSION["userType"]="Guest";?>
         <input type="submit" value="Continue as guest" />
       </form>
     </section>

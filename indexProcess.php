@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-$username;
-$password;
-
 //Get username and password from the form
 if(isset($_POST['username'])){
   $username = $_POST['username'];
@@ -25,11 +22,14 @@ $rows=$db->query("SELECT * FROM user");
 //Check if this username/password combination is in user table
 foreach($rows as $row){
   echo("Password: " .$password . "   DB:" . $row["Password"]);
-  if (($row["Password"] == $password) && (strcmp($row["Username"],$safe_username) == 0)){
-    header( 'Location: index.html' );
+  if (($row["Password"] == $password) && (strcmp($db->quote($row["Username"]),$safe_username) == 0)){
+    $_SESSION['name']=$safe_username;
+    $_SESSION['userType']=$row["UserType"];
+    $_SESSION['userID']=$row["UserID"];
+    header( 'Location: home.php' );
   }
   else {
-    echo("rejected");
+    echo("Username or password incorrect");
   }
 }
  ?>

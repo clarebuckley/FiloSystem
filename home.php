@@ -1,13 +1,12 @@
 <?php session_start();
-//check if the user is logged in, otherwise redirect to start
-if (! isset($_SESSION['name'])){
-  header("Location: indexProcess.php");
-}?>
+//this page is visible to all users
+?>
 
 <!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="home.js"></script>
     <title>FiLo System Homepage</title>
   </head>
   <body>
@@ -20,24 +19,42 @@ if (! isset($_SESSION['name'])){
       <h2>Home</h2>
     </header>
 
+    <!-- only show if user is signed in -->
+    <?php if($_SESSION["userType"] != "Guest"){?>
     <form action="report.php">
-    </br>
+      </br>
       <input type="submit" value="Report a found item" />
     </form>
+    <?php } ?>
 
     <form action="find.html">
+      </br>
       <input type="submit" value="Search for a lost item" />
     </form>
     </br></br>
 
     <section id = "register">
       </br>
-      <form action="index.html">
+      <!-- only show if user is signed in -->
+      <?php if($_SESSION["userType"] != "Guest"){?>
+      <form action="logout.php">
         <input type="submit" value="Log out" />
       </form>
+      <?php } ?>
+
+      <!-- only show if user is a guest -->
+      <?php if($_SESSION["userType"] == "Guest"){?>
       <form action="register.php">
         <input type="submit" value="Create an account" />
       </form>
+      <?php } ?>
+
+      <!-- only show if user is an admin -->
+      <?php if($_SESSION["userType"] == "Admin"){?>
+      <form action="admin.php">
+        <input type="submit" value="Admin options" />
+      </form>
+      <?php } ?>
     </section>
 
   </body>
