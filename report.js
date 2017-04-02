@@ -28,19 +28,7 @@ function changedType() {
            "<option value='Music player'> Music player </option>" +
            "<option value='Other'> Other </option>" +
       "</select></p>" +
-      "<p>Material: " +
-      "<select name='elecMake' id='elecMake'>" +
-           "<option value='Sony'> Sony </option>" +
-           "<option value='Apple'> Apple </option>" +
-           "<option value='Samsung'> Samsung </option>" +
-           "<option value='Microsoft'> Microsoft </option>" +
-           "<option value='Panasonic'> Panasonic </option>" +
-           "<option value='LG'> LG </option>" +
-           "<option value='Nokia'> Nokia </option>" +
-           "<option value='HP'> HP </option>" +
-           "<option value='Dell'> Dell </option>" +
-           "<option value='Other'> Other </option>" +
-      "</select></p>";
+      "<p> Make: <input type='text' name='elecMake' size='20' maxlength='20'/></p>";
     }
     if(document.getElementById("type").value == "Pet"){
       document.getElementById("specific").innerHTML = "<p> Name: <input type='text' name='name' size='10' maxlength='10'/></p>"+
@@ -50,7 +38,8 @@ function changedType() {
            "<option value='Cat'> Cat </option>" +
            "<option value='Rabbit'> Rabbit </option>" +
            "<option value='Other'> Other </option>" +
-      "</select></p>";
+      "</select></p>" +
+      "<p> Breed: <input type='text' name='breed' size='20' maxlength='20'/></p>"
     }
 }
 //Disable the submit button if a type selection hasn't been made

@@ -51,6 +51,12 @@ if(isset($_POST['elecMake'])){
 if(isset($_POST['petType'])){
   $petType = $_POST['petType'];
 }
+if(isset($_POST['name'])){
+  $name = $_POST['name'];
+}
+if(isset($_POST['breed'])){
+  $breed = $_POST['breed'];
+}
 
 //Connect to database through PDO
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
@@ -62,22 +68,29 @@ try{
   VALUES(?,?,?,?,?,?,?,?,?)" );
   $insert->execute(array($userID, $type, $date, $addline1, $addline2, $postcode, $colour, $file, $description));
 
+  //Get this item ID
+  $query = $db->query("SELECT MAX(ItemID) FROM item");
+  $itemID = $query->fetch(PDO::FETCH_ASSOC);
+
   //Insert into jewellery table
   if($type == "Jewellery"){
-    $itemID = $db->query("SELECT MAX(ItemID FROM item");
     $insert=$db->prepare("INSERT INTO jewellery (`itemID`, `type`, `materialType`)
     VALUES(?,?,?)" );
-    $insert->execute(array($itemID, $jewelleryType, $materialType));
+    $insert->execute(array($itemID['MAX(ItemID)'], $jewelleryType, $materialType));
   }
 
   //Insert into electronics table
   if($type == "Electronics"){
-
+    $insert=$db->prepare("INSERT INTO electronics (`itemID`, `type`, `make`)
+    VALUES(?,?,?)" );
+    $insert->execute(array($itemID['MAX(ItemID)'], $elecType, $elecMake));
   }
 
   //Insert into pet table
   if($type == "Pet"){
-
+    $insert=$db->prepare("INSERT INTO pet (`itemID`, `Name`, `type`, `breed`)
+    VALUES(?,?,?,?)" );
+    $insert->execute(array($itemID['MAX(ItemID)'], $name, $petType, $breed));
   }
 
 
