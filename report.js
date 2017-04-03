@@ -28,10 +28,10 @@ function changedType() {
            "<option value='Music player'> Music player </option>" +
            "<option value='Other'> Other </option>" +
       "</select></p>" +
-      "<p> Make: <input type='text' name='elecMake' size='20' maxlength='20'/></p>";
+      "<p> Make: <input type='text' name='elecMake' size='20' maxlength='20' required/></p>";
     }
     if(document.getElementById("type").value == "Pet"){
-      document.getElementById("specific").innerHTML = "<p> Name: <input type='text' name='name' size='10' maxlength='10'/></p>"+
+      document.getElementById("specific").innerHTML = "<p> Name: <input type='text' name='name' size='10' maxlength='10' required/></p>"+
       "<p>Type: " +
       "<select name='petType' id='petType;'" +
            "<option value='Dog'> Dog </option>" +
@@ -39,7 +39,7 @@ function changedType() {
            "<option value='Rabbit'> Rabbit </option>" +
            "<option value='Other'> Other </option>" +
       "</select></p>" +
-      "<p> Breed: <input type='text' name='breed' size='20' maxlength='20'/></p>"
+      "<p> Breed: <input type='text' name='breed' size='20' maxlength='20' required/></p>"
     }
 }
 //Disable the submit button if a type selection hasn't been made

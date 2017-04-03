@@ -10,7 +10,7 @@ body{
 	box-sizing:border-box;
 }
 
-h2, form {
+h2, form, h3 {
   width: 100%;
   padding-left:50px;
 }
@@ -23,6 +23,23 @@ form{
     padding-right: 50px;
     padding-bottom: 50px;
 }
+
+table {
+    border-collapse: collapse;
+    width: 90%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+th{
+  background-color:#3973ac;
+  color:#FFFFFF;
+}
+
 
 #main-header {
   width: 100%;

@@ -7,7 +7,7 @@ if (! isset($_SESSION['name'])){
   <head>
     <link rel="stylesheet" href="css/style.css">
     <script type="text/javascript" src="report.js"></script>
-    <title>FiLo System Register</title>
+    <title>FiLo System</title>
   </head>
   <body>
     <header id = "main-header">

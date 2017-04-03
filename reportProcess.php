@@ -94,7 +94,7 @@ try{
   }
 
 
-  echo "Added item successfully!";
+  echo "Added item successfully! <p><a href='home.php'>Back</a></p>";
 }
 catch(PDOException $exception) {
   //Catch exception

@@ -27,7 +27,7 @@
     </form>
     <?php } ?>
 
-    <form action="find.html">
+    <form action="search.php">
       </br>
       <input type="submit" value="Search for a lost item" />
     </form>

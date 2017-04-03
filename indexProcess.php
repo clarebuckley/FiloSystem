@@ -13,7 +13,7 @@ if(isset($_POST['password'])){
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-//Sanitise inputs
+//Sanitise username
 $safe_username = $db->quote($username);
 //Get user data
 $rows=$db->query("SELECT * FROM user");
