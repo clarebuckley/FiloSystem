@@ -28,8 +28,8 @@ try{
   //Insert record using form data
   $insert=$db->prepare("INSERT INTO user (`Username`, `Password`, `Title`, `Forename`, `Surname`, `Email`, `UserType`) VALUES(?,
   ?,?,?,?,?,?)" );
-  $insert->execute(array($username, $password, $title, $forename, $surname, $email, $_SESSION['userType']));
-  echo "Added " . $title . " " . $forename . " " . $surname . " successfully! <p><a href="home.php">Back</a></p>";
+  $insert->execute(array($username, $password, $title, $forename, $surname, $email, 'Registered'));
+  echo "Added " . $title . " " . $forename . " " . $surname . " successfully! <p><a href='home.php'>Back</a></p>";
 }
 catch(PDOException $exception) {
   //Catch exception

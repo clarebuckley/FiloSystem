@@ -1,7 +1,4 @@
 <?php session_start();
-if (! isset($_SESSION['name'])){
-  header("Location: index.php");
-}
 require('searchProcess.php');?>
 <!DOCTYPE html>
 <html>
@@ -17,7 +14,7 @@ require('searchProcess.php');?>
     <header id = "secondary-header">
       <h3>Search for a lost item:</h3>
     </header>
-    <p><a href="home.php">Back</a></br></p>
+    <p><a href="home.php">Home</a></br></p>
 
     <!--Table of found electronics-->
     <h3>Found electronics</h3>
@@ -47,9 +44,12 @@ require('searchProcess.php');?>
           if(($row["itemID"] == $itemID)){ ?>
         <td><?= $row["type"]?></td>
         <td><?= $row["make"]?></td>
+        <?php if ($_SESSION["userType"]!="Guest"){?>
         <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
-      </tr>
-        <?php }}} ?>
+        <?php } if($_SESSION["userType"]=="Admin")?>
+        <td><a href="something" id="request">Edit item</a></td>
+          </tr>
+      <?php }}} ?>
     </table></p>
     </br>
 
@@ -79,9 +79,10 @@ require('searchProcess.php');?>
           foreach ($jewelleryRows as $row) {?>
           <td><?= $row["type"]?></td>
           <td><?= $row["materialType"]?></td>
+          <?php if ($_SESSION["userType"]!="Guest"){?>
           <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
         </tr>
-          <?php }} ?>
+          <?php }}} ?>
     </table></p>
     </br>
 
@@ -114,9 +115,10 @@ require('searchProcess.php');?>
           <td><?= $row["Name"]?></td>
           <td><?= $row["type"]?></td>
           <td><?= $row["breed"]?></td>
+          <?php if ($_SESSION["userType"]!="Guest"){?>
           <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
         </tr>
-          <?php }} ?>
+          <?php }}} ?>
     </table></p>
 
   </body>

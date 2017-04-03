@@ -8,7 +8,11 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 if(isset($_GET['id'])){
   $id = $_GET['id'];
   $item=$db->query("SELECT * FROM item WHERE ItemID = '$id'");
-}?>
+}
+$user = $_SESSION['userID'];
+$request=$db->query("SELECT * FROM request WHERE requestedUser ='$user'");
+?>
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -23,8 +27,9 @@ if(isset($_GET['id'])){
     <header id = "secondary-header">
       <h3>Request an item</h3>
     </header>
-    <p><a href="search.php">Back</a></br></p>
-    <?php if(isset($_GET["page"]) && ($_GET["page"] === "search")){?>
+    <p><a href="home.php">Home</a></br></p>
+    <?php  //If the user is making a request for an item, show this table on the page
+    if(isset($_GET["page"]) && ($_GET["page"] === "search" || $_GET["page"] === "process")){?>
     <h3>You are requesting:</h3>
     <p><table>
       <tr>
@@ -34,7 +39,6 @@ if(isset($_GET['id'])){
         <th>Description</th>
         <th>Image</th>
       </tr>
-
       <?php
       foreach($item as $row){
         ?>  <tr><td><?= $row["FoundDate"]?></td>
@@ -45,6 +49,7 @@ if(isset($_GET['id'])){
       </tr>
         <?php } ?>
     </table></p>
+    <!--Allow the user to submit the request for this item -->
     <form method = "post" action = "requestProcess.php?">
       <p> Reason for request: <input type="text" name="reason" size="40" maxlength="40" required /></p>
       <input type="hidden" name="id" value="<?=$id?>">
@@ -52,8 +57,34 @@ if(isset($_GET['id'])){
     </form>
     <?php }?>
 
+    <!--Show the all of the user's previous requests and whether they've been approved-->
     <h3>Your previous requests status:</h3>
-
+    <p><table>
+      <tr>
+        <th>Item requested</th>
+        <th>Date requested</th>
+        <th>Reason</th>
+        <th>Approved?</th>
+      </tr>
+      <?php
+      foreach($request as $row){?>
+        <?php $thisItemID = $row["requestedItem"];
+        $query=$db->query("SELECT * FROM item WHERE ItemID ='$thisItemID'");
+        $thisItem = $query->fetch(); ?>
+        <tr><td>A <?= $thisItem["Colour"]?> item of type  <?= $thisItem["Type"]?>.</br>Description: <?= $thisItem["Description"]?>.</br>
+          <img src="data:image/jpeg;base64,<?php echo base64_encode($thisItem['Photo']); ?> width='100' height='100'"/></td>
+        <td><?= $row["dateRequested"]?></td>
+        <td><?= $row["reason"]?></td>
+        <?php if($row["isApproved"] == 0){ ?>
+          <td>No</td>
+        <?php } ?>
+        <?php if($row["isApproved"] == 1){ ?>
+          <td>Yes</td>
+        <?php } ?>
+      </tr>
+      <?php }
+      if($request->rowCount() == 0) { ?><td>You have not requested any items</td> <?php } ?>
+    </table></br></p>
 
   </body>
 </html>

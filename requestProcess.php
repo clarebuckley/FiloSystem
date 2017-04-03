@@ -23,7 +23,7 @@ try{
   $insert=$db->prepare("INSERT INTO request (`requestedUser`, `requestedItem`, `dateRequested`, `reason`, `isApproved`)
   VALUES(?,?,?,?,?)" );
   $insert->execute(array($user, $id, $date, $reason, "false"));
-  echo "Request sent successfully! <p><a href='request.php'>Back</a></p></br><p><a href='home.php'>Home</a></p>";
+  echo "Request sent successfully! <a href='home.php'>Home</a></p>";
 }
 catch(PDOException $exception) {
   //Catch exception
