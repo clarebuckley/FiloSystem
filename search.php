@@ -47,7 +47,7 @@ require('searchProcess.php');?>
           if(($row["itemID"] == $itemID)){ ?>
         <td><?= $row["type"]?></td>
         <td><?= $row["make"]?></td>
-        <td><a href="request.php">Request this item</a></td>
+        <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
       </tr>
         <?php }}} ?>
     </table></p>
@@ -79,7 +79,7 @@ require('searchProcess.php');?>
           foreach ($jewelleryRows as $row) {?>
           <td><?= $row["type"]?></td>
           <td><?= $row["materialType"]?></td>
-          <td><a href="request.php">Request this item</a></td>
+          <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
         </tr>
           <?php }} ?>
     </table></p>
@@ -114,7 +114,7 @@ require('searchProcess.php');?>
           <td><?= $row["Name"]?></td>
           <td><?= $row["type"]?></td>
           <td><?= $row["breed"]?></td>
-          <td><a href="request.php">Request this item</a></td>
+          <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
         </tr>
           <?php }} ?>
     </table></p>

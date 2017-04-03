@@ -25,6 +25,10 @@
       </br>
       <input type="submit" value="Report a found item" />
     </form>
+    <form action="request.php">
+      </br>
+      <input type="submit" value="View requested items" />
+    </form>
     <?php } ?>
 
     <form action="search.php">
