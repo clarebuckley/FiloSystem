@@ -46,10 +46,10 @@ require('searchProcess.php');?>
         <td><?= $row["make"]?></td>
         <?php if ($_SESSION["userType"]!="Guest"){?>
         <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
-        <?php } if($_SESSION["userType"]=="Admin")?>
-        <td><a href="something" id="request">Edit item</a></td>
+        <?php } if($_SESSION["userType"] == "Admin"){?>
+        <td><a href="editItem.php?id=<?=$itemID?>" id="request">Edit item</a></td>
           </tr>
-      <?php }}} ?>
+      <?php }}}} ?>
     </table></p>
     </br>
 
@@ -81,6 +81,8 @@ require('searchProcess.php');?>
           <td><?= $row["materialType"]?></td>
           <?php if ($_SESSION["userType"]!="Guest"){?>
           <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
+          <?php } if($_SESSION["userType"] == "Admin"){?>
+          <td><a href="editItem.php?id=<?=$itemID?>" id="request">Edit item</a></td>
         </tr>
           <?php }}} ?>
     </table></p>
@@ -117,6 +119,8 @@ require('searchProcess.php');?>
           <td><?= $row["breed"]?></td>
           <?php if ($_SESSION["userType"]!="Guest"){?>
           <td><a href="request.php?id=<?=$itemID?>&page=search" id="request">Request this item</a></td>
+          <?php } if($_SESSION["userType"] == "Admin"){?>
+          <td><a href="editItem.php?id=<?=$itemID?>" id="request">Edit item</a></td>
         </tr>
           <?php }}} ?>
     </table></p>

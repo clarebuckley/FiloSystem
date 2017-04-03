@@ -21,7 +21,6 @@ $rows=$db->query("SELECT * FROM user");
 
 //Check if this username/password combination is in user table
 foreach($rows as $row){
-  echo("Password: " .$password . "   DB:" . $row["Password"]);
   if (($row["Password"] == $password) && (strcmp($db->quote($row["Username"]),$safe_username) == 0)){
     $_SESSION['name']=$safe_username;
     $_SESSION['userType']=$row["UserType"];
