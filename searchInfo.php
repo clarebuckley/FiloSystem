@@ -65,7 +65,7 @@ $row=$query->fetch();?>
       if($row['Type']=="Pet"){
         $petQuery = $db->query("SELECT * FROM pet WHERE itemID = '$itemID'");
         $petRow = $petQuery->fetch();?>
-          <td><?= $petRow["Nype"]?></td>
+          <td><?= $petRow["Name"]?></td>
           <td><?= $petRow["type"]?></td>
           <td><?= $petRow["breed"]?></td>
       <?php }?>

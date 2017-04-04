@@ -4,8 +4,6 @@ if ($_SESSION['userType'] != "Admin"){
 }
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-$users=$db->query("SELECT * FROM user");
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +26,7 @@ $users=$db->query("SELECT * FROM user");
     <form method = "post">
       Order by:
         <select name="orderSelection" >
-            <option value="">Change ordering...</option>
+            <option value="Empty">Change ordering...</option>
              <option value="Surname">Surname</option>
              <option value="Forename">Forename</option>
              <option value="UserType">User type</option>
@@ -42,9 +40,18 @@ $users=$db->query("SELECT * FROM user");
         <th>Forename</th>
         <th>Surname</th>
         <th>Username</th>
+        <th>Email</th>
         <th>User Type</th>
       </tr>
       <?php
+      //Change order of rows
+      if(isset($_POST["orderSelection"]) && $_POST['orderSelection']!="Empty"){
+        $users=$db->query("SELECT * FROM user ORDER BY " . $_POST['orderSelection']);
+      }
+      else{
+        $users=$db->query("SELECT * FROM user");
+      }
+
       if($users->rowCount() == 0) { ?>
         <td>There are no users in the system</td>
         <td>-</td>
@@ -53,13 +60,14 @@ $users=$db->query("SELECT * FROM user");
         <td>-</td>
       <?php }
       foreach($users as $row){
-        ?>  <tr><td>a type </td>
-        <td>description here</td>
-        <td>picture here</td>
-        <td><?= $row["requestedUser"]?></td>
-        <td><?= $row["reason"]?></td>
-        <td><?= $row["dateRequested"]?></td>
-        <td><a href="approveReqProcess.php?id=<?=$row["requestedItem"]?>&option=Approved">Approve this item</a> | <a href="approveReqProcess.php?id=<?=$row["requestedItem"]?>&option=Rejected">Reject this item</a></td>
+        ?>
+        <td><?= $row["Title"]?></td>
+        <td><?= $row["Forename"]?></td>
+        <td><?= $row["Surname"]?></td>
+        <td><?= $row["Username"]?></td>
+        <td><?= $row["Email"]?></td>
+        <td><?= $row["UserType"]?></td>
+        <td><a href="editUser.php?id=<?=$row["UserID"]?>&">Edit user</a></td>
       </tr>
         <?php } ?>
     </table></p>

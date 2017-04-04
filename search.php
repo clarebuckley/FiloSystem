@@ -24,7 +24,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;
     <form method = "post">
       Order by:
         <select name="orderSelection" >
-            <option value="">Change ordering...</option>
+            <option value="Empty">Change ordering...</option>
 			       <option value="Type">Type of item</option>
 			       <option value="FoundDate">Date found</option>
 		    </select>
@@ -41,14 +41,18 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;
 
       <?php
       //Change order of rows
-      if(isset($_POST["orderSelection"]) && $_POST['orderSelection']!="Change ordering..."){
-        $ordering = " ORDER BY " . $_POST['orderSelection'] . " DESC";
+      if(isset($_POST["orderSelection"]) && $_POST['orderSelection']!="Empty"){
+        echo ("Selection:" .$_POST['orderSelection']);
+        $itemRows=$db->query("SELECT * FROM item ORDER BY " . $_POST['orderSelection']);
       } else {
-        $ordering = "";
+        $itemRows=$db->query("SELECT * FROM item");
       }
-      $itemRows=$db->query("SELECT * FROM item" . $ordering);
+
       foreach($itemRows as $row){
         $itemID = $row["ItemID"];
+        $query=$db->query("SELECT * FROM request WHERE requestedItem ='$itemID'");
+        $itemRequest=$query->fetch();
+        if($itemRequest['isApproved']!="Approved"){
         ?>  <tr>
         <td><?= $row["Type"]?></td>
         <td><?= $row["FoundDate"]?></td>
@@ -57,7 +61,7 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;
         <td><a href="searchInfo.php?id=<?=$itemID?>" id="info">More information</a></td>
         <?php } ?>
         <tr>
-        <?php } ?>
+        <?php }} ?>
     </table></p>
     </br>
 

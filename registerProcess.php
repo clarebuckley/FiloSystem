@@ -1,8 +1,5 @@
 <?php
 session_start();
-if (! isset($_SESSION['name'])){
-  header("Location: index.php");
-}
 //Get form data, all are required in register.php
 $title = $_POST['title'];
 if(isset($_POST['forename'])){
@@ -15,7 +12,13 @@ if(isset($_POST['username'])){
   $username = $_POST['username'];
 }
 if(!empty(trim($_POST['password']))){
-  $password = md5($_POST['password']);
+  if($_POST['password'] == $_POST['passwordCheck']){
+    $password = md5($_POST['password']);
+  }else{
+    echo("Error: passwords didn't match. Please return and re-enter your password.</br><p><a href='register.php'>Back</a></p>");
+    die();
+  }
+
 }
 if(isset($_POST['email'])){
   $email = $_POST['email'];

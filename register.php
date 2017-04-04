@@ -28,6 +28,7 @@
       <p> Email: <input type="email" name="email" size="30" maxlength="30" required /></p>        <!which version of html am i using>
       <p> Username: <input type="text" name="username" size="20" maxlength="20" required /></p>
       <p> Password: <input type="password" name="password" size="20" maxlength="20" required /></p>
+      <p> Re-enter password: <input type="password" name="passwordCheck" size="20" maxlength="20" required /></p>
       <p><input type="submit" action="home.php" name="submit" value="Register" /></p>
     </form>
   </body>
