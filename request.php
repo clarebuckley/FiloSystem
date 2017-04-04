@@ -78,7 +78,12 @@ $request=$db->query("SELECT * FROM request WHERE requestedUser ='$user'");
         <td><?= $row["isApproved"]?></td>
       </tr>
       <?php }
-      if($request->rowCount() == 0) { ?><td>You have not requested any items</td> <?php } ?>
+      if($request->rowCount() == 0) { ?>
+        <td>You have not requested any items</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+      <?php } ?>
     </table></br></p>
 
   </body>

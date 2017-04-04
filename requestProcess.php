@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (isset($_SESSION['userType'])){
+if (! isset($_SESSION['userType'])){
   header("Location: index.php");
 }
 
