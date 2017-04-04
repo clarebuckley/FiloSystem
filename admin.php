@@ -26,7 +26,7 @@ if ($_SESSION['userType'] != "Admin"){
       <input type="submit" value="Approve requests" />
     </form>
 
-    <form action="userControls.php">
+    <form action="userOptions.php">
       </br>
       <input type="submit" value="User options" />
     </form>

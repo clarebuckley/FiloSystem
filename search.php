@@ -22,13 +22,13 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;
     <h3>Found items</h3>
     <!-- Option to order items by headers -->
     <form method = "post">
-      <p>Order by:
+      Order by:
         <select name="orderSelection" >
             <option value="">Change ordering...</option>
 			       <option value="Type">Type of item</option>
 			       <option value="FoundDate">Date found</option>
-		    </select></p>
-      <p><input type="submit" name="order" value="Change order" /></p>
+		    </select>
+    <input type="submit" name="order" value="Change order" />
     </form>
 
     <!--Table of all found items-->

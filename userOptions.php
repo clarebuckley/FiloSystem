@@ -5,8 +5,7 @@ if ($_SESSION['userType'] != "Admin"){
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$requests=$db->query("SELECT * FROM request WHERE isApproved ='Pending'");
-
+$users=$db->query("SELECT * FROM user");
 ?>
 
 <!DOCTYPE html>
@@ -21,36 +20,42 @@ $requests=$db->query("SELECT * FROM request WHERE isApproved ='Pending'");
       <h4><i>Report or find lost items</i></h4>
     </header>
     <header id = "secondary-header">
-      <h3>Approve pending requests</h3>
+      <h3>Change user details</h3>
     </header>
     <p><a href="home.php">Home</a></br></p>
-    <h3>Current requests:</h3>
+    <p><a href="admin.php">Back</a></br></p>
+    <h3>Users:</h3>
+    <form method = "post">
+      Order by:
+        <select name="orderSelection" >
+            <option value="">Change ordering...</option>
+             <option value="Surname">Surname</option>
+             <option value="Forename">Forename</option>
+             <option value="UserType">User type</option>
+        </select>
+    <input type="submit" name="order" value="Change order" />
+    </form>
+
     <p><table>
       <tr>
-        <th>Item type</th>
-        <th>Description</th>
-        <th>Image</th>
-        <th>Requested by</th>
-        <th>Reason</th>
-        <th>Date requested</th>
-        <th>Approve</th>
+        <th>Title</th>
+        <th>Forename</th>
+        <th>Surname</th>
+        <th>Username</th>
+        <th>User Type</th>
       </tr>
       <?php
-      if($requests->rowCount() == 0) { ?>
-        <td>There are no pending requests</td>
+      if($users->rowCount() == 0) { ?>
+        <td>There are no users in the system</td>
         <td>-</td>
         <td>-</td>
         <td>-</td>
         <td>-</td>
-        <td>-</td>
-        <td>-</td><?php }
-      foreach($requests as $row){
-        $itemID=$row['requestedItem'];
-        $itemQuery=$db->query("SELECT * FROM item WHERE ItemID = '$itemID'");
-        $item=$itemQuery->fetch();
-        ?>  <tr><td><?= $item["Type"]?></td>
-        <td><?= $item["Description"]?></td>
-        <td><?= $item["Photo"]?></td>
+      <?php }
+      foreach($users as $row){
+        ?>  <tr><td>a type </td>
+        <td>description here</td>
+        <td>picture here</td>
         <td><?= $row["requestedUser"]?></td>
         <td><?= $row["reason"]?></td>
         <td><?= $row["dateRequested"]?></td>
