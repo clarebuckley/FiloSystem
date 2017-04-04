@@ -44,7 +44,7 @@ $requests=$db->query("SELECT * FROM request WHERE isApproved ='0'");
         <td><?= $row["requestedUser"]?></td>
         <td><?= $row["reason"]?></td>
         <td><?= $row["dateRequested"]?></td>
-        <td><input type="submit" action="SOMETHING" name="approve" value="Approve" /></td>
+        <td><a href="approveReqProcess.php?id=<?=$row["requestedItem"]?>">Approve this item</a></td>
       </tr>
         <?php } ?>
     </table></p>

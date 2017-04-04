@@ -90,6 +90,8 @@ $item=$query->fetch();
           </select></p>
           <p> Breed: <input type='text' name='breed' size='20' maxlength='20' value="<?= $item['breed'] ?>" required/></p>
       <?php }}} ?>
+      <input type="hidden" value="<?=$itemID?>" name="itemID" />
       <input type="submit" name="submit" id="submit" value="Change item data"/></p>
+    </form>
   </body>
 </html>
