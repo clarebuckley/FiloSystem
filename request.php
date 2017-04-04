@@ -75,12 +75,7 @@ $request=$db->query("SELECT * FROM request WHERE requestedUser ='$user'");
           <img src="data:image/jpeg;base64,<?php echo base64_encode($thisItem['Photo']); ?> width='100' height='100'"/></td>
         <td><?= $row["dateRequested"]?></td>
         <td><?= $row["reason"]?></td>
-        <?php if($row["isApproved"] == 0){ ?>
-          <td>No</td>
-        <?php } ?>
-        <?php if($row["isApproved"] == 1){ ?>
-          <td>Yes</td>
-        <?php } ?>
+        <td><?= $row["isApproved"]?></td>
       </tr>
       <?php }
       if($request->rowCount() == 0) { ?><td>You have not requested any items</td> <?php } ?>

@@ -5,7 +5,7 @@ if ($_SESSION['userType'] != "Admin"){
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-$requests=$db->query("SELECT * FROM request WHERE isApproved ='0'");
+$requests=$db->query("SELECT * FROM request WHERE isApproved ='Pending'");
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +44,7 @@ $requests=$db->query("SELECT * FROM request WHERE isApproved ='0'");
         <td><?= $row["requestedUser"]?></td>
         <td><?= $row["reason"]?></td>
         <td><?= $row["dateRequested"]?></td>
-        <td><a href="approveReqProcess.php?id=<?=$row["requestedItem"]?>">Approve this item</a></td>
+        <td><a href="approveReqProcess.php?id=<?=$row["requestedItem"]?>&option=Approved">Approve this item</a> | <a href="approveReqProcess.php?id=<?=$row["requestedItem"]?>&option=Rejected">Reject this item</a></td>
       </tr>
         <?php } ?>
     </table></p>

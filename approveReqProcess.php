@@ -7,12 +7,12 @@ if ($_SESSION['userType']!="Admin"){
 //Connect to database through PDO
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
+$status=$_GET["option"];
 try{
   //Insert record using form data
-  $update=$db->prepare("UPDATE request SET`isApproved`=1 WHERE requestedItem=?" );
-  $update->execute(array($_GET['id']));
-  echo "Approved item! <p><a href='home.php'>Back</a></p>";
+  $update=$db->prepare("UPDATE request SET`isApproved`=? WHERE requestedItem=?" );
+  $update->execute(array($status, $_GET['id']));
+  echo "Approved status updated successfully! <p><a href='home.php'>Back</a></p>";
 }
 catch(PDOException $exception) {
   //Catch exception
