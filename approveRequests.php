@@ -24,8 +24,6 @@ $requests=$db->query("SELECT * FROM request WHERE isApproved ='Pending'");
     </header>
     <p><a href="home.php">Home</a></br></p>
     <h3>Current requests:</h3>
-    <?php
-    if($requests->rowCount() == 0) { ?><td>There are no pending requests</td> <?php } ?>
     <p><table>
       <tr>
         <th>Item type</th>
@@ -37,6 +35,7 @@ $requests=$db->query("SELECT * FROM request WHERE isApproved ='Pending'");
         <th>Approve</th>
       </tr>
       <?php
+      if($requests->rowCount() == 0) { ?><td>There are no pending requests</td><?php }
       foreach($requests as $row){
         ?>  <tr><td>a type </td>
         <td>description here</td>

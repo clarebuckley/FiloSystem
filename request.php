@@ -64,7 +64,7 @@ $request=$db->query("SELECT * FROM request WHERE requestedUser ='$user'");
         <th>Item requested</th>
         <th>Date requested</th>
         <th>Reason</th>
-        <th>Approved?</th>
+        <th>Status</th>
       </tr>
       <?php
       foreach($request as $row){?>
