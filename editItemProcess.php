@@ -3,24 +3,44 @@ session_start();
 if ($_SESSION['userType']!="Admin"){
   header("Location: index.php");
 }
+
+$db = new PDO("mysql:dbname=coursework; host=localhost","root","");
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$itemID = $_POST['itemID'];
+$query=$db->query("SELECT * FROM item WHERE ItemID ='$itemID'");
+$item=$query->fetch();
+
+
 //Get form data
 if(isset($_POST['type'])){
   $type = $_POST['type'];
+} else{
+  $type = $item['Type'];
 }
 if(isset($_POST['date'])){
   $date = $_POST['date'];
+} else {
+  $date = $item['Date'];
 }
 if(isset($_POST['addline1'])){
   $addline1 = $_POST['addline1'];
+}else {
+  $addline1 = $item['Addline1'];
 }
 if(isset($_POST['addline2'])){
   $addline2 = $_POST['addline2'];
+}else {
+  $addline2 = $item['Addline2'];
 }
 if(isset($_POST['postcode'])){
   $postcode = $_POST['postcode'];
+}else {
+  $postcode = $item['Postcode'];
 }
 if(isset($_POST['colour'])){
   $colour = $_POST['colour'];
+}else {
+  $colour = $item['Colour'];
 }
 if(($_FILES['photo']['size'] > 0) && ($_FILES['photo']['error'] == 0)) {
   $photo = explode('.', $_FILES['photo']['name']);
@@ -28,41 +48,67 @@ if(($_FILES['photo']['size'] > 0) && ($_FILES['photo']['error'] == 0)) {
   if(($extension == "jpg") || ($extn == "jpeg") || ($extn == "gif")) {
     $file = fopen($_FILES['photo']['tmp_name'], "rb");
   }
+}else {
+  $file = $item['Photo'];
 }
 if(isset($_POST['description'])){
   $description = $_POST['description'];
+}else {
+  $description = $item['Description'];
 }
 //Jewellery-specific fields
-if(isset($_POST['jewelleryType'])){
-  $jewelleryType = $_POST['jewelleryType'];
-}
-if(isset($_POST['materialType'])){
-  $materialType = $_POST['materialType'];
+if($type=="Jewellery"){
+  $query=$db->query("SELECT * FROM jewellery WHERE itemID ='$itemID'");
+  $jewelleryItem=$query->fetch();
+  if(isset($_POST['jewelleryType'])){
+    $jewelleryType = $_POST['jewelleryType'];
+  }else {
+    $jewelleryType = $jewelleryItem['type'];
+  }
+  if(isset($_POST['materialType'])){
+    $materialType = $_POST['materialType'];
+  }else {
+    $materialType = $jewelleryItem['materialType'];
+  }
 }
 //Electronics-specific fields
-if(isset($_POST['elecType'])){
-  $elecType = $_POST['elecType'];
-}
-if(isset($_POST['elecMake'])){
-  $elecMake = $_POST['elecMake'];
+if($type=="Electronics"){
+  $query=$db->query("SELECT * FROM electronics WHERE itemID ='$itemID'");
+  $elecItem=$query->fetch();
+  if(isset($_POST['elecType'])){
+    $elecType = $_POST['elecType'];
+  }else {
+    $elecType = $elecItem['type'];
+  }
+  if(isset($_POST['elecMake'])){
+    $elecMake = $_POST['elecMake'];
+  }else {
+    $elecMake = $elecItem['make'];
+  }
 }
 //Pet-specific fields
-if(isset($_POST['petType'])){
-  $petType = $_POST['petType'];
-}
-if(isset($_POST['name'])){
-  $name = $_POST['name'];
-}
-if(isset($_POST['breed'])){
-  $breed = $_POST['breed'];
+if($type=="Pet"){
+  $query=$db->query("SELECT * FROM pet WHERE itemID ='$itemID'");
+  $pet=$query->fetch();
+  if(isset($_POST['petType'])){
+    $petType = $_POST['petType'];
+  }else {
+    $petType = $pet['type'];
+  }
+  if(isset($_POST['name'])){
+    $name = $_POST['name'];
+  }else {
+    $name = $pet['Name'];
+  }
+  if(isset($_POST['breed'])){
+    $breed = $_POST['breed'];
+  }else {
+    $breed = $pet['breed'];
+  }
 }
 if(isset($_POST['itemID'])){
   $itemID = $_POST['itemID'];
 }
-
-//Connect to database through PDO
-$db = new PDO("mysql:dbname=coursework; host=localhost","root","");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 try{
   //Insert record using form data
@@ -73,7 +119,7 @@ try{
 
   //Insert into jewellery table
   if($type == "Jewellery"){
-    $insert=$db->prepare("UPDATE jewellery SET `type`=? `materialType`=? WHERE `itemID`=?" );
+    $insert=$db->prepare("UPDATE jewellery SET `type`=?, `materialType`=? WHERE `itemID`=?" );
     $insert->execute(array($jewelleryType, $materialType, $itemID));
   }
 
