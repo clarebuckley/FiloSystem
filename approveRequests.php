@@ -35,7 +35,14 @@ $requests=$db->query("SELECT * FROM request WHERE isApproved ='Pending'");
         <th>Approve</th>
       </tr>
       <?php
-      if($requests->rowCount() == 0) { ?><td>There are no pending requests</td><?php }
+      if($requests->rowCount() == 0) { ?>
+        <td>There are no pending requests</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td><?php }
       foreach($requests as $row){
         ?>  <tr><td>a type </td>
         <td>description here</td>

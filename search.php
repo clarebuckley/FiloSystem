@@ -1,6 +1,6 @@
 <?php session_start();
 $db = new PDO("mysql:dbname=coursework; host=localhost","root","");
-$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,8 +19,19 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     </header>
     <p><a href="home.php">Home</a></br></p>
 
-    <!--Table all found items-->
     <h3>Found items</h3>
+    <!-- Option to order items by headers -->
+    <form method = "post">
+      <p>Order by:
+        <select name="orderSelection" >
+            <option value="">Change ordering...</option>
+			       <option value="Type">Type of item</option>
+			       <option value="FoundDate">Date found</option>
+		    </select></p>
+      <p><input type="submit" name="order" value="Change order" /></p>
+    </form>
+
+    <!--Table of all found items-->
     <p><table>
       <tr>
         <th>Type of item</th>
@@ -29,8 +40,13 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       </tr>
 
       <?php
-      $itemRows=$db->query("SELECT * FROM item");
-      $itemID;
+      //Change order of rows
+      if(isset($_POST["orderSelection"]) && $_POST['orderSelection']!="Change ordering..."){
+        $ordering = " ORDER BY " . $_POST['orderSelection'] . " DESC";
+      } else {
+        $ordering = "";
+      }
+      $itemRows=$db->query("SELECT * FROM item" . $ordering);
       foreach($itemRows as $row){
         $itemID = $row["ItemID"];
         ?>  <tr>
