@@ -37,7 +37,7 @@ $request=$db->query("SELECT * FROM request WHERE requestedUser ='$user'");
     <header id = "secondary-header">
       <h3>Request an item</h3>
     </header>
-    <?php if($_GET['page']=="search"){?>
+    <?php if(isset($_GET['page']) && $_GET['page']=="search"){?>
     <p><a href="search.php">Back</a></p>
   <?php }else { ?>
     <p><a href="home.php">Back</a></p>

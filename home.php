@@ -36,7 +36,7 @@
     </form>
     <form action="request.php">
       </br>
-      <input type="submit" value="View requested items" />
+      <input type="submit" value="View status of your requested items" />
     </form>
     <?php } ?>
 
