@@ -14,10 +14,20 @@ $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);;
       <h1>FiLo System</h1>
       <h4><i>Report or find lost items</i></h4>
     </header>
+    <nav>
+         |<a href="home.php" style="color: #FFFFFF;">>Home</a>   |
+      <?php if($_SESSION["userType"] == "Admin"){?>
+      <a href="admin.php" style="color: #FFFFFF;">>Admin options</a>   |
+      <?php } ?>
+      <!-- only show if user is signed in -->
+      <?php if($_SESSION["userType"] != "Guest"){?>
+      <a href="logout.php" style="color: #FFFFFF;">>Log out</a>   |
+      <?php } ?>
+    </nav>
     <header id = "secondary-header">
       <h3>Search for a lost item:</h3>
     </header>
-    <p><a href="home.php">Home</a></br></p>
+    <p><a href="home.php">Back</a></br></p>
 
     <h3>Found items</h3>
     <!-- Option to order items by headers -->

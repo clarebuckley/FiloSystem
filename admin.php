@@ -16,10 +16,12 @@ if ($_SESSION['userType'] != "Admin"){
       <h1>FiLo System</h1>
       <h4><i>Report or find lost items</i></h4>
     </header>
+    <nav>
+         |<a href="home.php" style="color: #FFFFFF;">>Home</a>   |
+    </nav>
     <header id = "secondary-header">
       <h3>Admin options</h3>
     </header>
-    <p><a href="home.php">Home</a></br></p>
 
     <form action="approveRequests.php">
       </br>

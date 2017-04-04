@@ -14,11 +14,22 @@ if (! isset($_SESSION['name'])){
       <h1>FiLo System</h1>
       <h4><i>Report or find lost items</i></h4>
     </header>
+    <nav>
+         |<a href="home.php" style="color: #FFFFFF;">>Home</a>   |
+      <?php if($_SESSION["userType"] == "Admin"){?>
+      <a href="admin.php">Admin options</a>   |
+      <?php } ?>
+      <!-- only show if user is signed in -->
+      <?php if($_SESSION["userType"] != "Guest"){?>
+      <a href="logout.php">Log out</a>   |
+      <?php } ?>
+
+    </nav>
     <header id = "secondary-header">
       <h2>Report a found item:</h2>
     </header>
+    </br>
     <p><a href="home.php">Back</a></p>
-
     <form method="post" action="reportProcess.php"  enctype="multipart/form-data">
       <p> Type of item:
         <select name="type" onchange="changedType()" id="type">

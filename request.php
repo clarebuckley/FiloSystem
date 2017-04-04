@@ -24,10 +24,24 @@ $request=$db->query("SELECT * FROM request WHERE requestedUser ='$user'");
       <h1>FiLo System</h1>
       <h4><i>Report or find lost items</i></h4>
     </header>
+    <nav>
+         |<a href="home.php" style="color: #FFFFFF;">>Home</a>   |
+      <?php if($_SESSION["userType"] == "Admin"){?>
+      <a href="admin.php" style="color: #FFFFFF;">>Admin options</a>   |
+      <?php } ?>
+      <!-- only show if user is signed in -->
+      <?php if($_SESSION["userType"] != "Guest"){?>
+      <a href="logout.php" style="color: #FFFFFF;">>Log out</a>   |
+      <?php } ?>
+    </nav>
     <header id = "secondary-header">
       <h3>Request an item</h3>
     </header>
-    <p><a href="home.php">Home</a></br></p>
+    <?php if($_GET['page']=="search"){?>
+    <p><a href="search.php">Back</a></p>
+  <?php }else { ?>
+    <p><a href="home.php">Back</a></p>
+    <?php } ?>
     <?php  //If the user is making a request for an item, show this table on the page
     if(isset($_GET["page"]) && ($_GET["page"] === "search" || $_GET["page"] === "process")){?>
     <h3>You are requesting:</h3>
