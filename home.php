@@ -19,6 +19,13 @@
       <h2>Home</h2>
     </header>
 
+    <!-- only show if user is an admin -->
+    <?php if($_SESSION["userType"] == "Admin"){?>
+    <form action="admin.php">
+      <input type="submit" value="Admin options" />
+    </form>
+    <?php } ?>
+    
     <!-- only show if user is signed in -->
     <?php if($_SESSION["userType"] != "Guest"){?>
     <form action="report.php">
@@ -50,13 +57,6 @@
       <?php if($_SESSION["userType"] == "Guest"){?>
       <form action="register.php">
         <input type="submit" value="Create an account" />
-      </form>
-      <?php } ?>
-
-      <!-- only show if user is an admin -->
-      <?php if($_SESSION["userType"] == "Admin"){?>
-      <form action="admin.php">
-        <input type="submit" value="Admin options" />
       </form>
       <?php } ?>
     </section>

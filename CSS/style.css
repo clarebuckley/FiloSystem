@@ -14,13 +14,6 @@ h2, form, h3 {
   width: 100%;
   padding-left:50px;
 }
-.visible {
-  visibility: visible;
-}
-
-.not-visible {
-  visibility: collapse;
-}
 
 p{
   padding-left:50px;
@@ -29,6 +22,7 @@ p{
 form{
     padding-right: 50px;
     padding-bottom: 50px;
+    margin-right: 100px;
 }
 
 table {
